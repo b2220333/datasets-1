@@ -137,7 +137,9 @@ class Robonet(tfds.core.BeamBasedBuilder):
             shape=(None, ACTIONS_DIM), dtype=tf.float32),
         # Robot states: float32, [None, STATE_DIM]
         'states': tfds.features.Tensor(
-            shape=(None, STATES_DIM), dtype=tf.float32)
+            shape=(None, STATES_DIM), dtype=tf.float32),
+        # Filename: Text
+        'filename': tfds.features.Text()
     })
 
     return tfds.core.DatasetInfo(
@@ -188,6 +190,7 @@ class Robonet(tfds.core.BeamBasedBuilder):
           'video': video_bytes,
           'actions': actions,
           'states': states,
+          'filename': filename,
       }
       return os.path.basename(filename), features
 
